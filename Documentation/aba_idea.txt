@@ -6,21 +6,33 @@ Carnivore
 	int health;
 	Sex sex;
 	
-	constructor(int speed, int health, Position location, Sex sex) //If the arguments in the constructor are not used, it tries to apply them automatically
+	Construct(int speed, int health, Position location, Sex sex) //If the arguments in the constructor are not used, it tries to apply them automatically
 	{}
 	
-	Move(Herbivore closestPrey, Herb closestHerb, Carnivore closestAlly)
+	Move()
 	{
 		if(time%9 == 0)
 		{
-			--healt;
+			--health;
 		}
 		
 		if(health <= 0)
 		{
 			die();
 		}
-		//Neural network??
+		
+		int dist = MAXINT;
+		Herbivore closestHerbi;
+		for agents b with(b.type == Herbivore)
+		{
+			if(distanceBetween(a,b) < dist)
+			{
+				closestHerbi = b;
+				dist = distanceBetween(a,b);
+			}
+		}
+		// same for closest herb and carn
+		//Neural network working on closestHerbi,Carni and Herb??
 		location = ...
 	}
 	
@@ -56,21 +68,34 @@ Herbivore
 	int health;
 	Sex sex;
 	
-	constructor(int speed, int health, Position location, Sex sex)
+	Construct(int speed, int health, Position location, Sex sex)
 	{}
 	
-	Move(Herbivore closestAlly, Herb closestFood, Carnivore closestEnemy)
+	
+	Move()
 	{
 		if(time%9 == 0)
 		{
-			--healt;
+			--health;
 		}
 		
 		if(health <= 0)
 		{
 			die();
 		}
-		//Neural network??
+		
+		int dist = MAXINT;
+		Herbivore closestHerbi;
+		for agents b with(b.type == Herbivore)
+		{
+			if(distanceBetween(a,b) < dist)
+			{
+				closestHerbi = b;
+				dist = distanceBetween(a,b);
+			}
+		}
+		// same for closest herb and carn
+		//Neural network working on closestHerbi,Carni and Herb??
 		location = ...
 	}
 	
@@ -106,7 +131,7 @@ Herb
 	Move()
 	{}
 	
-	constructor(Position location)
+	Construct(Position location)
 	{}
 	
 	OnEncounter(Herb h)
@@ -121,14 +146,12 @@ Herb
 	
 	OnEncounter(Herbivore h)
 	{
-		
+		die();
 	}
 }
 
 Environment
 {
-	
-	
 	Setup()
 	{
 		for(int i = 0 ; i < 10 ; ++i)
@@ -146,17 +169,7 @@ Environment
 		++time;
 		for agents a with(true)
 		{
-			int dist = MAXINT;
-			Herbivore closestHerbi;
-			for agents b with(b.type == Herbivore)
-			{
-				if(distanceBetween(a,b) < dist)
-				{
-					closestHerbi = b;
-					dist = distanceBetween(a,b);
-				}
-			}
-			// same for closest herb and carn
+			
 			move(closestHerbi,closestHerb,closestCarn);
 		}
 	}
