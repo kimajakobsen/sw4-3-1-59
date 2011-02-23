@@ -7,7 +7,11 @@ Carnivore
 	Sex sex;
 	
 	Construct(int speed, int health, Position location, Sex sex) //If the arguments in the constructor are not used, it tries to apply them automatically
-	{}
+	{
+		size = 5;
+		shape = triagle;
+		color = blue;
+	}
 	
 	Move()
 	{
@@ -69,7 +73,11 @@ Herbivore
 	Sex sex;
 	
 	Construct(int speed, int health, Position location, Sex sex)
-	{}
+	{
+		size = 5;
+		shape = triagle;
+		color = red;
+	}
 	
 	
 	Move()
@@ -132,7 +140,11 @@ Herb
 	{}
 	
 	Construct(Position location)
-	{}
+	{
+		size = 3;
+		shape = circle;
+		color = green;
+	}
 	
 	OnEncounter(Herb h)
 	{
@@ -162,6 +174,8 @@ Environment
 			Herbivore.Construct(rand(6,11), rand(5,10), rand(0,gridSize),rand(0,gridSize), rand(male,female));
 		}
 		time = 0;
+		
+		gridSize = 100;
 	}
 	
 	Run()
