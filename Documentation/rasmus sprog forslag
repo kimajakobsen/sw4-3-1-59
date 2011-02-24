@@ -1,0 +1,125 @@
+
+agent ant {
+	size = (2,3);
+	color = black;
+	speed = 5;  
+	is solid;
+
+	int op1 = 0; 
+	int op2 = 0;
+	byte moveAtLastInt = 0;
+	
+	visiblity {
+		range from direction - 5 to direction + 5 = 10;
+		all = 3;
+	}
+	
+	bag {
+		1 food;
+	}
+	
+	movement {
+		if(bag.content == 1){
+			direction = towards(hole);
+			make 1 trail at this.x,this.y;
+		} else {
+			if (t = inVecinity(trail) && ant not on trail){ 
+				direction = towards(t);
+			}
+			else {
+				direction = moveRandom(direction); 
+			}
+		}
+	
+	}
+}
+
+
+
+interaction (ant, ant){
+	float newdir;
+	if($1.lastInteraction != $2){
+		if($1.moveAtlastInt == 1){ // went right last time so that is increased
+			$1.op1++;
+		} 
+		if($1.moveAtlastInt == 2){ // went left last time so that is increased
+			$1.op2++;
+		}
+	} else {
+		if($1.moveAtlastInt == 1){ // went right last time with fail so that is decreased
+			$1.op1--;
+		} 
+		if($1.moveAtlastInt == 2){ // went left last time with fail so that is decreased
+			$1.op2--;
+		}
+	}
+	if($1.op1 > $1.op2){
+		ant.moveAtlastInt = 1;
+		newdir $1.dir + 0.2pi;
+	} else if($1.op1 < $1.op2){
+		ant.moveAtlastInt = 2;
+		newdir $1.dir - 0.2pi;
+	} else {
+		ant.moveAtlastInt = 3;
+		float num  = random(-1,1);
+		op1 + num;
+		op2 - num;
+		newdir = float*num;
+	}
+	
+	$1.direction = newdir;
+
+}
+
+interaction (ant, food){
+	remove 1 $2;
+	$1.bag = 1 $2;
+	message {
+		range 5;
+		listeners.direction = towards($1);
+	}
+}
+
+interaction (ant, hole){
+	ant.bag = empty;
+}
+
+
+object trail {
+	size = (2,3);
+	is not solid
+	is not movable
+	color = blue;
+}
+
+
+object food {
+	size(1,1);
+	is movable;
+	is solid;
+	weight = 500;
+}
+
+object hole {
+	is not solid;
+	is not movable;
+	color = green;
+}
+
+
+
+
+
+stage main {
+	x = 500;
+	y = 500;
+	make 500 food place at 2,2;
+	make 500 ant place at 30,30;
+	make 1 hole place at 30,30;
+	
+
+}
+
+
+
+
