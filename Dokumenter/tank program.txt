@@ -1,0 +1,64 @@
+agent tank {
+	size = (5,5);
+	color = green;
+	solid = true;
+	speed = 5;
+	
+	int health = 100;
+	visibility {
+		range from direction - 6 to direction + 6 = 100;
+		default 0;
+	}
+	
+	bag {
+		10,10 bullets;
+	}
+	
+	movement {
+		if(health <= 0){
+			kill();
+		}
+		
+		if(inVecinity(tank)){
+			moveInPosition();
+			make 1 bullet b;
+			b.direction = direction;
+		}
+	}
+	
+	moveInPosition(){
+		
+	}
+	
+	
+}
+
+
+
+agent bullet {
+	size (1,1);
+	color = yellow;
+	solid true;
+	speed = 100;
+	
+	
+}
+
+interaction(tank,bullet){
+	$1.health - 10;
+	$1.kill();
+}
+
+
+
+
+
+stage main {
+	x = 500;
+	y = 500;
+	make 5 tank place at random;
+
+	
+
+}
+
