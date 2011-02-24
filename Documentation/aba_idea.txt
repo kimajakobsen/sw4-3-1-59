@@ -1,0 +1,190 @@
+const int healthToReproduce = 10;
+int time;
+
+Carnivore
+{
+	int health;
+	Sex sex;
+	
+	Construct(int speed, int health, Position location, Sex sex) //If the arguments in the constructor are not used, it tries to apply them automatically
+	{
+		size = 5;
+		shape = triagle;
+		color = blue;
+	}
+	
+	Move()
+	{
+		if(time%9 == 0)
+		{
+			--health;
+		}
+		
+		if(health <= 0)
+		{
+			die();
+		}
+		
+		int dist = MAXINT;
+		Herbivore closestHerbi;
+		for agents b with(b.type == Herbivore)
+		{
+			if(distanceBetween(a,b) < dist)
+			{
+				closestHerbi = b;
+				dist = distanceBetween(a,b);
+			}
+		}
+		// same for closest herb and carn
+		//Neural network working on closestHerbi,Carni and Herb??
+		location = ...
+	}
+	
+	OnEncounter(Herb h)
+	{
+		
+	}
+	
+	OnEncounter(Carnivore c)
+	{
+		if(sex == female && c.sex == male)
+		{
+			if(health > healthToReproduce)
+			{
+				Carnivore.Combine(this,c);
+				health -= 5;
+			}
+		}
+		else if(sex != c.sex && c.hasReproduced)
+		{
+			health -= 5;
+		}
+	}
+	
+	OnEncounter(Herbivore h)
+	{
+		health += 3;
+	}
+}
+
+Herbivore
+{
+	int health;
+	Sex sex;
+	
+	Construct(int speed, int health, Position location, Sex sex)
+	{
+		size = 5;
+		shape = triagle;
+		color = red;
+	}
+	
+	
+	Move()
+	{
+		if(time%9 == 0)
+		{
+			--health;
+		}
+		
+		if(health <= 0)
+		{
+			die();
+		}
+		
+		int dist = MAXINT;
+		Herbivore closestHerbi;
+		for agents b with(b.type == Herbivore)
+		{
+			if(distanceBetween(a,b) < dist)
+			{
+				closestHerbi = b;
+				dist = distanceBetween(a,b);
+			}
+		}
+		// same for closest herb and carn
+		//Neural network working on closestHerbi,Carni and Herb??
+		location = ...
+	}
+	
+	OnEncounter(Herb h)
+	{
+		health += 3;
+	}
+	
+	OnEncounter(Carnivore c)
+	{
+		die();
+	}
+	
+	OnEncounter(Herbivore h)
+	{
+		if(sex == female && c.sex == male)
+		{
+			if(health > healthToReproduce)
+			{
+				Herbivore.Combine(this,c);
+				health -= 5;
+			}
+		}
+		else if(sex != c.sex && c.hasReproduced)
+		{
+			health -= 5;
+		}
+	}
+}
+
+Herb
+{
+	Move()
+	{}
+	
+	Construct(Position location)
+	{
+		size = 3;
+		shape = circle;
+		color = green;
+	}
+	
+	OnEncounter(Herb h)
+	{
+		
+	}
+	
+	OnEncounter(Carnivore c)
+	{
+		
+	}
+	
+	OnEncounter(Herbivore h)
+	{
+		die();
+	}
+}
+
+Environment
+{
+	Setup()
+	{
+		for(int i = 0 ; i < 10 ; ++i)
+		{
+			Herb.Construct(rand(0,gridSize),rand(0,gridSize));
+			Herb.Construct(rand(0,gridSize),rand(0,gridSize));
+			Carnivore.Construct(rand(5,10), rand(5,10), rand(0,gridSize),rand(0,gridSize), rand(male,female));
+			Herbivore.Construct(rand(6,11), rand(5,10), rand(0,gridSize),rand(0,gridSize), rand(male,female));
+		}
+		time = 0;
+		
+		gridSize = 100;
+	}
+	
+	Run()
+	{
+		++time;
+		for agents a with(true)
+		{
+			
+			move(closestHerbi,closestHerb,closestCarn);
+		}
+	}
+}
