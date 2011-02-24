@@ -9,7 +9,7 @@ Carnivore
 	Construct(int speed, int health, Position location, Sex sex) //If the arguments in the constructor are not used, it tries to apply them automatically
 	{
 		size = 5;
-		shape = triagle;
+		shape = triangle;
 		color = blue;
 	}
 	
@@ -75,7 +75,7 @@ Herbivore
 	Construct(int speed, int health, Position location, Sex sex)
 	{
 		size = 5;
-		shape = triagle;
+		shape = triangle;
 		color = red;
 	}
 	
@@ -170,8 +170,8 @@ Environment
 		{
 			Herb.Construct(rand(0,gridSize),rand(0,gridSize));
 			Herb.Construct(rand(0,gridSize),rand(0,gridSize));
-			Carnivore.Construct(rand(5,10), rand(5,10), rand(0,gridSize),rand(0,gridSize), rand(male,female));
-			Herbivore.Construct(rand(6,11), rand(5,10), rand(0,gridSize),rand(0,gridSize), rand(male,female));
+			Carnivore.Construct(randRange(5,10), randRange(5,10), randRange(0,gridSize),randRange(0,gridSize), rand(male,female));
+			Herbivore.Construct(randRange(6,11), randRange(5,10), randRange(0,gridSize),randRange(0,gridSize), rand(male,female));
 		}
 		time = 0;
 		
