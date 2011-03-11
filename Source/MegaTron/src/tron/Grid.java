@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 public class Grid  extends JPanel implements Drawable {
 
-	public ArrayList<Cell> cells;
+	public Cell[][] cells;
 
 	@Override
 	public void draw() {
