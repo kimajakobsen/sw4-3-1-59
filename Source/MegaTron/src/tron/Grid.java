@@ -12,5 +12,11 @@ public class Grid implements Drawable {
 		
 	}
 	
+	public void setGridColor(int posX, int posY, Color c){
+		
+		
+		
+	}
+	
 
 }
