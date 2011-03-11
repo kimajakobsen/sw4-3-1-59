@@ -6,4 +6,10 @@ public class Master {
 		
 		System.out.println("dhhdd");
 	}
+	
+	void RedTron(){
+		
+		
+	}
+	
 }
