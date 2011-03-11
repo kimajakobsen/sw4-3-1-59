@@ -1,5 +1,6 @@
 package tron;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 public class Grid implements Drawable {
@@ -9,6 +10,12 @@ public class Grid implements Drawable {
 	@Override
 	public void draw() {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public void setGridColor(int posX, int posY, Color c){
+		
+		
 		
 	}
 	
