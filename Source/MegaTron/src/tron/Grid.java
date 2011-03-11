@@ -8,20 +8,20 @@ import javax.swing.JPanel;
 public class Grid  extends JPanel implements Drawable {
 
 	public ArrayList<Cell> cells;
-	
+
 	@Override
 	public void draw() {
 		// TODO Auto-generated method stub
-		
-	}
-	
-	public void setGridColor(int posX, int posY, Color c){
-		
-		
-		
-	}
-	
 
 	}
+
+	public void setGridColor(int posX, int posY, Color c){
+
+
+
+	}
+
+
+}
 
 }
