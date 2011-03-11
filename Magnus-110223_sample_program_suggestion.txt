@@ -1,0 +1,98 @@
+/*
+PURPOSE
+train neural network which is suitable for use
+in search/rescue operations, specifically agents
+correspond to helicopters, while rats correspond
+to entities which should be rescued by the helicopter.
+*/
+
+begin setup
+	/* specifies that world will be randomly generated as a pyramid */
+	map-type pyramid(start), dynamic;
+	
+	/* specifies amount of worlds to create */
+	worlds 50;
+	
+	/* specifies amount of agents and rats per world */
+	world-population agents(3), rats(40);
+	
+	/* number of cycles per world */
+	world-time 100000;
+	
+	/* genetic algorithm is used,
+	crossover is used,
+	mutation is used with a rate of 0.001% of genes,
+	unlimited amount of generations,
+	the genetic algorithm will choose those agents with the minimum number of rats outside "start" field */
+	
+	evolution true(crossover, mutation(0.001), generations(unlimited), measurement(world.MinNumOfRatsOutsideStart);
+	
+	 /* agents "think" */
+	agents.ai = true;
+	
+	 /* amount of neurons in agents brain is random from 5 to 30 */
+	agents.neuralNetworkNeurons(random(5-30));
+	
+	/* agents has awareness of other agents around it, in a distance of 10 "squares" */
+	agents.selfAwareness = true, limited(10squares);
+	
+	/* agents has awareness of environment in a distance of 10 "squares" */
+	agents.envAwareness = true, limited(10squares):
+	
+	agents.maxSpeed = 10;
+	
+	/* agents can move (fly) through the pyramid */
+	agents.worldColission = false;
+	agents.carryLoad = 5; /* agents can carry 5 rats at a time */
+	
+	/* specifies that agents shold pickup rats if they are above them */
+	agents.pickup = rat;
+end setup
+
+begin execute
+	agents-move;
+	
+	all-rat {
+		rat-move;
+	}
+end execute
+
+rat : agent
+{
+	preferences
+	{
+		/* these are inherited from agent*/
+		rat.collideable = false; /* a rat will not colide with other rats or agents, but will with map */
+		rat.ai = false;
+		rat.selfAwareness = false;
+	}
+	
+	rat-move
+	{
+		int direction;
+		int should_i_move;
+		
+		direction = random(1-4);
+		should_i_move = random(1-2);
+		
+		if (should_i_move == 1)
+		{
+			if (direction == 1)
+			{
+				rat.x = rat.x + 1
+			}
+			if (direction == 2)
+			{
+				rat.x = rat.x - 1
+			}
+			if (direction == 3)
+			{
+				rat.y = rat.y + 1
+			}
+			if (direction == 4)
+			{
+				rat.y = rat.y - 1
+			}
+		}
+	}
+}
