@@ -9,7 +9,7 @@ Carnivore
 	Construct(int speed, int health, Position location, Sex sex) //If the arguments in the constructor are not used, it tries to apply them automatically
 	{
 		size = 5;
-		shape = triagle;
+		shape = triangle;
 		color = blue;
 	}
 	
@@ -75,7 +75,7 @@ Herbivore
 	Construct(int speed, int health, Position location, Sex sex)
 	{
 		size = 5;
-		shape = triagle;
+		shape = triangle;
 		color = red;
 	}
 	
