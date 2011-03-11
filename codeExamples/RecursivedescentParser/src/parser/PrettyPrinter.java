@@ -46,9 +46,9 @@ public class PrettyPrinter implements IVisitor {
 		
 		// TODO Auto-generated method stub
 		stm.P.visit(this, arg);
-		pln(";");
+		
 		stm.D.visit(this, arg);
-		p(";");
+		
 		return null;
 	}
 
@@ -66,7 +66,7 @@ public class PrettyPrinter implements IVisitor {
 		Token a = (Token)declaration.V.visit(this, arg);
 		p(" = ");
 		declaration.E.visit(this, arg);
-		
+		pln(";");
 		idTable.enter(a.spelling, declaration);
 		
 		return null;
