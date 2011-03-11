@@ -17,7 +17,6 @@ public class Grid  extends JPanel implements Drawable {
 
 		for (int i = 0; i < x; i++){
 			for (int j = 0; j < y; i++){
-
 				cells[i][j] = new Cell();
 			}
 		}
@@ -25,7 +24,7 @@ public class Grid  extends JPanel implements Drawable {
 
 	@Override
 	public void draw() {
-
+		
 		// TODO Auto-generated method stub
 
 
@@ -34,7 +33,7 @@ public class Grid  extends JPanel implements Drawable {
 	}
 
 	public void setGridColor(int posX, int posY, Color c){
-
+		cells[posX][posY]
 
 
 	}
