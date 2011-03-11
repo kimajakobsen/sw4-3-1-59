@@ -41,4 +41,3 @@ public class Grid  extends JPanel implements Drawable {
 
 }
 
-}
