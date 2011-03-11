@@ -38,8 +38,8 @@ public class Grid  extends JPanel implements Drawable {
 	}
 	
 	public void paintComponent(Graphics g){
-		//super.paintComponent(g);
-		
+		super.paintComponent(g);
+		g.drawRect(2,2,2,2);
 		for (int i = 0; i < x; i++){
 			for (int j = 0; j < y; j++){
 				cells[i][j].setColor(Color.black);
