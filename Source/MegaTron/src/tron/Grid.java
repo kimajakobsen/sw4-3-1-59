@@ -8,16 +8,33 @@ import javax.swing.JPanel;
 public class Grid  extends JPanel implements Drawable {
 
 	public Cell[][] cells;
-	
+	private int x = 30;
+	private int y = 30;
+
+
+	public Grid(){
+		cells = new Cell[x][y];
+
+		for (int i = 0; i < x; i++){
+			for (int j = 0; j < y; i++){
+
+				cells[i][j] = new Cell();
+			}
+		}
+	}
+
 	@Override
 	public void draw() {
-		
+
 		// TODO Auto-generated method stub
-		cells = new Cell[30][30];
+
+
+
+
 	}
 
 	public void setGridColor(int posX, int posY, Color c){
-		
+
 
 
 	}
