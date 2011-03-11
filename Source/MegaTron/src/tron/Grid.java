@@ -33,7 +33,7 @@ public class Grid  extends JPanel implements Drawable {
 	}
 
 	public void setGridColor(int posX, int posY, Color c){
-		cells[posX][posY]
+		cells[posX][posY].setColor(c);
 
 
 	}
