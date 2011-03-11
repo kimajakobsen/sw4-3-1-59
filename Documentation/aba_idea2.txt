@@ -1,0 +1,65 @@
+//Random mover, die when close, random rebirth
+
+Mover
+{
+	Setup()
+	{
+		color = rand(green,red,blue,yellow);
+		location.x = randRange(0,xSize);
+		location.y = randRange(0,ySize);
+		shape = triangle;
+		direction = randRange(0.0,PI*2);
+		speed = 10;
+	}
+
+	Action()
+	{
+		double minDist = MAXDOUBLE;
+		Mover closest;
+		for each agent a where a != this
+		{
+			double dist = distanceBetween(this,a);
+			if dist < minDist then
+			{
+				minDist = dist;
+				closest = a;
+				if(dist < 3)
+				{
+					Kill this;
+				}
+			}
+		}
+		if randRange(0,9) == 0 then
+		{
+			Setup 1 Mover();
+		}
+		location.x += cos(dir)*speed;
+		location.x = location.x%xSize;
+		location.y += sin(dir)*speed;
+		location.y = location.y%xSize;
+		direction = randRange(0.0,PI*2);
+	}
+}
+
+Environment
+{
+	int time;
+	Setup()
+	{
+		Setup 10 Mover();
+		time = 0;
+		actionDelay = 50;//ms
+		xSize = 200;
+		ySize = 200;
+	}
+
+	Action()
+	{
+		++time;
+		print(time + "\n");
+		if time >= 100 then exit();
+	}
+}
+
+//First Environment.Setup is run, then Action of every thing, starting with environment.
+//Kill and Setups are delayed until after current Action cycle
