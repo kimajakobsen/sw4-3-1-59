@@ -3,7 +3,9 @@ package tron;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public class Grid implements Drawable {
+import javax.swing.JPanel;
+
+public class Grid  extends JPanel implements Drawable {
 
 	public ArrayList<Cell> cells;
 	
